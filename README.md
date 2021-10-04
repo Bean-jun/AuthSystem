@@ -52,8 +52,10 @@
    - version 0.1.1 使用jwt实现授权
    - version 0.1.2 使用jwt实现鉴权
 3. 开放适用版本version 0.3 beta
-   - 修复bug，退出适用版本
+   - 修复bug，推出适用版本
 
 4. 性能优化 version 0.4 beta
 5. 正式开放 version 0.5
+   - 授权、鉴权统一
+   - 授权鉴权分离
 6. ....
