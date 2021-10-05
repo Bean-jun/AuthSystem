@@ -4,8 +4,9 @@
 3. 鉴权 auth_decode(token:Str)
 """
 import datetime
-import jwt
 from http import HTTPStatus
+
+import jwt
 from django.conf import settings
 
 
