@@ -128,3 +128,19 @@ AUTH_USER_MODEL = "Auth.User"
 
 # token过期时间(单位：秒)
 TOKEN_EXP = 60 * 60 * 2
+
+# redis缓存
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
+
+try:
+    from localSettings import *
+except Exception as e:
+    pass

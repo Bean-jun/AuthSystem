@@ -71,7 +71,7 @@ class UserLoginForm(ModelForm):
             raise ValidationError("用户不存在")
 
         if not check_password(pwd, user.password):
-            self.request.error = {"msg": "用户不存在"}
+            self.request.error = {"msg": "账号密码错误"}
             raise ValidationError("账号密码错误")
 
         self.cleaned_data["inner_user"] = user

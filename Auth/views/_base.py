@@ -13,6 +13,9 @@ from Auth.common import response, auth_decode
 
 @method_decorator(csrf_exempt, "dispatch")
 class BaseView(View):
+    """
+    用于处理类之外的请求方式修正
+    """
 
     @staticmethod
     def exception_func(request, *args, **kwargs):
@@ -52,22 +55,29 @@ class BaseView(View):
 
 
 class BaseAuthView(BaseView):
+    """
+    jwt权限认证类
+    """
 
     @staticmethod
     def auth(f):
         @wraps(f)
-        def inner(request, *args, **kwargs):
-            flag, msg = auth_decode(request.headers.get("Authorization"))
+        def inner(self, request, *args, **kwargs):
+            Authorization = request.headers.get("Authorization")
+            if not Authorization:
+                return JsonResponse(response(HTTPStatus.FORBIDDEN, "请设置Authorization"))
+
+            flag, msg = auth_decode(Authorization)
             if not flag:
                 return JsonResponse(msg)
             try:
                 email = msg.get("data").get("email")
             except Exception as e:
-                return response(HTTPStatus.INTERNAL_SERVER_ERROR, "服务器内部异常")
+                return JsonResponse(response(HTTPStatus.INTERNAL_SERVER_ERROR, "服务器内部异常"))
 
             user = User.objects.filter(email=email).first()
             kwargs["inner_user"] = user
 
-            return f(request, *args, **kwargs)
+            return f(self, request, *args, **kwargs)
 
         return inner
