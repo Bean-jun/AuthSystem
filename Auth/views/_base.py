@@ -6,9 +6,20 @@ from django.http import JsonResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import View
+from django_redis import get_redis_connection
+
 from Auth.models import User
 
 from Auth.common import response, auth_decode
+
+redis_client = get_redis_connection()
+
+
+class UserSecret():
+
+    def __init__(self, secret_id, redirect_uri):
+        self.secret_id = secret_id
+        self.redirect_uri = redirect_uri
 
 
 @method_decorator(csrf_exempt, "dispatch")
@@ -38,6 +49,16 @@ class BaseView(View):
                 kwargs[k] = v
 
         return kwargs
+
+    def parse_params_developer(self):
+        # 解析请求secret_id, redirect_uri
+        secret_id = self.request.GET.get("secret_id")
+        redirect_uri = self.request.GET.get("redirect_uri")
+
+        if not all([secret_id, redirect_uri]):
+            return JsonResponse(response(HTTPStatus.NOT_ACCEPTABLE, "请确认请求URL是否异常"))
+
+        self.request.user_secret = UserSecret(secret_id, redirect_uri)
 
     def dispatch(self, request, *args, **kwargs):
         if request.method.lower() in self.http_method_names:

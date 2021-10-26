@@ -1,14 +1,14 @@
-from http import HTTPStatus
 import base64
-import time
 import hashlib
+import time
+from http import HTTPStatus
+
 from django.conf import settings
-from django_redis import get_redis_connection
 from django.http import JsonResponse
 
 from Auth.common import response
-from ._base import BaseAuthView
 from Auth.form.auth import UserInfoForm
+from ._base import BaseAuthView
 
 
 class UserInfo(BaseAuthView):

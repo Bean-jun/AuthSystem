@@ -140,6 +140,12 @@ CACHES = {
     }
 }
 
+# 前端授权界面
+HTML_OAUTH = "http://www.beanjun.icu/login/"
+
+# oauth授权时间(单位：秒)
+OAUTH_EXP = 60 * 60 * 2
+
 try:
     from localSettings import *
 except Exception as e:
