@@ -32,8 +32,7 @@ class Oauth(BaseView):
             return JsonResponse(response(HTTPStatus.FORBIDDEN, "授权码异常"))
 
         # 授权登录页面-前端授权页面地址
-        authorization_index = "{}?{}&{}".format(settings.HTML_OAUTH, user.secret_id,
-                                                self.request.user_secret.redirect_uri)
+        authorization_index = "{}?secret_id={}&redirect_uri={}".format(settings.HTML_OAUTH, user.secret_id, self.request.user_secret.redirect_uri)
         return redirect(authorization_index)
 
     def post(self, *args, **kwargs):
