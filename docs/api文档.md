@@ -45,7 +45,7 @@
     "data": {
         "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Ilx1NWMwZlx1NjYwZSIsImVtYWlsIjoiMTczNzE0MzgyMjdAMTIyLmNvbSIsImV4cCI6MTYzNTI2OTc2N30.lkz7WUQ4QbOVQRuTeHoaNSnyIK7x-lbWfruZYsxn96w",
         "redirect_uri": "",
-        "code": "",
+        "authorization_code": "",
         "username": "小明",
         "email": "17371438227@122.com"
     }
@@ -124,7 +124,7 @@
 | secret_id    | MTYzNTI1NzAwNC41MDM4NDI=                                     |      |
 | ------------ | ------------------------------------------------------------ | ---- |
 | secret_value | 7f02f2cd2aa0ccbb3417b9afb67c572199643452e2aa1a1ffbba60d1b32744ab |      |
-| code         | 6b7187a1-f5d7-4ebe-a222-c36a939fad36                         |      |
+| authorization_code         | 6b7187a1-f5d7-4ebe-a222-c36a939fad36                         |      |
 
 返回数据格式
 
