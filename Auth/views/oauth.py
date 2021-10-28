@@ -39,7 +39,7 @@ class Oauth(BaseView):
         # 用户授权页面，授权后将信息写入redis, 这里需要开发者使用secret_id, secret_value, code进行内容的获取
         secret_id = kwargs.get("secret_id")
         secret_value = kwargs.get("secret_value")
-        code = kwargs.get("code")
+        code = kwargs.get("authorization_code")
 
         if not all([secret_id, secret_value, code]):
             return JsonResponse(response(HTTPStatus.TOO_EARLY, "请确认请求体是否异常"))

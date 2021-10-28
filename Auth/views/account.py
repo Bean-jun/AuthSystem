@@ -57,7 +57,7 @@ class LoginView(BaseView):
                 "token": auth_encode(username=user.username,
                                      email=user.email),
                 "redirect_uri": "",
-                "code": ""
+                "authorization_code": ""
             }
 
             # 授权成功的，使用开发者网站回调的用户需要将信息写入redis, 前端需要根据redirect_uri的值跳转
@@ -65,7 +65,7 @@ class LoginView(BaseView):
                 code = str(uuid.uuid4())
                 key = self.request.user_secret.secret_id + code
                 data["redirect_uri"] = self.request.user_secret.redirect_uri
-                data["code"] = code
+                data["authorization_code"] = code
                 redis_client.setex(name=key, value=json.dumps(val), time=settings.OAUTH_EXP)
 
             data.update(val)

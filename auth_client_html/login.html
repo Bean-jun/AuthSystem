@@ -90,10 +90,10 @@
                             redirect_uri = result.data.redirect_uri;
                             if (redirect_uri) {
                                 if (String(redirect_uri).startsWith("http")) {
-                                    location.href = redirect_uri;
+                                    location.href = redirect_uri + "?authorization_code=" + result.data.authorization_code;
                                 } else {
                                     redirect_uri = "http://" + redirect_uri;
-                                    location.href = redirect_uri;
+                                    location.href = redirect_uri + "?authorization_code=" + result.data.authorization_code;
                                 }
                             } else {
                                 // 跳转首页
