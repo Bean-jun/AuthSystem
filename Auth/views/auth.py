@@ -17,7 +17,7 @@ class UserInfo(BaseAuthView):
     """
 
     @BaseAuthView.auth
-    def get(self, request, *args, **kwargs):
+    def get(self, *args, **kwargs):
         user = kwargs.get("inner_user")
 
         data = {
@@ -36,7 +36,7 @@ class UserInfo(BaseAuthView):
                                      data=data))
 
     @BaseAuthView.auth
-    def patch(self, request, *args, **kwargs):
+    def patch(self, *args, **kwargs):
 
         user = kwargs.get("inner_user")
 
@@ -45,7 +45,7 @@ class UserInfo(BaseAuthView):
             "email": user.email,
         }
 
-        form = UserInfoForm(kwargs)
+        form = UserInfoForm(user, kwargs)
         if form.is_valid():
             user.is_developer = form.cleaned_data["is_developer"]
 
@@ -66,5 +66,5 @@ class UserInfo(BaseAuthView):
                                          data=data))
         else:
             return JsonResponse(response(code=HTTPStatus.OK,
-                                         msg="修改成功",
+                                         msg="密码异常，无法修改",
                                          data=data))
